@@ -1,6 +1,8 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+/* const bodyParser = require('body-parser'); */
+const cookieParser = require("cookie-parser");
 const mongoose = require('mongoose');
+const cors = require("cors");
 const path = require('path');
 
 const userRoutes = require('./routes/user');
@@ -27,8 +29,16 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use('/api/auth', userRoutes);
 
-app.use(bodyParser.json());
+app.use(
+    cors({
+      origin: ["http://localhost:3000"],
+      methods: ["GET", "POST"],
+      credentials: true,
+    })
+  );
+  app.use(cookieParser());
+  app.use(express.json())
+  app.use('/', userRoutes);
 
 module.exports = app;

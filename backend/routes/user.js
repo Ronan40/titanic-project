@@ -1,10 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const userCtrl = require('../controllers/user');
+const { register, login } = require("../controllers/user");
+const { checkUser } = require("../middleware/auth");
 
-// Les différentes routes d'authentification : 
+const router = require("express").Router();
 
-router.post('/signup', userCtrl.signup);
-router.post('/login', userCtrl.login);
+router.post("/", checkUser);
+router.post("/sign-up", register);
+router.post("/sign-in", login);
 
 module.exports = router;
