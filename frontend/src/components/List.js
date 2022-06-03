@@ -3,7 +3,7 @@ import data from "../data/train.json"
 
 function List(props) {
 
-    // Check the input value and return a result
+    // Check the input value and return the passenger list
     const filteredData = data.filter((el) => {   
         if (props.input === '') {
             return el;
@@ -12,6 +12,8 @@ function List(props) {
             return el.Name.toLowerCase().includes(props.input)
         }
     })
+
+
     return (
         <ul>
             {filteredData.map((item) => (

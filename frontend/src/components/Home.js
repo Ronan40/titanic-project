@@ -4,6 +4,11 @@ import Logout from "../assets/img/logout.png";
 import { useNavigate, Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
+import data from "../data/train.json"
+
+data.map((i) => {
+  let gender = i.Sex;
+});
 
 export default function Home() {
   const [inputText, setInputText] = useState("");
@@ -80,18 +85,18 @@ export default function Home() {
             <label htmlFor="">Class : </label>
             <select name="class" id="class">
               <option value=""> Choose a class </option>
-              <option value="first">1</option>
-              <option value="second">2</option>
-              <option value="third">3</option>
+              <option value="1">1st class</option>
+              <option value="2">2nd class</option>
+              <option value="3">3rd class</option>
             </select>
           </div>
           <div className="input-info">
             <label htmlFor="">Age : </label>
             <select name="class" id="class">
               <option value=""> Choose a category </option>
-              <option value="child">Child (0 to 16)</option>
-              <option value="teen">Teenage (17 to 28)</option>
-              <option value="adult">Adult (29 to 59)</option>
+              <option value="child">Child (0 to 12)</option>
+              <option value="teen">Teenage (12 to 21)</option>
+              <option value="adult">Adult (22 to 59)</option>
               <option value="senior">Senior ({">="} 60) </option>
             </select>
           </div>
@@ -102,7 +107,7 @@ export default function Home() {
           </div>
 
           <div className="input-info passenger">
-            <label htmlFor="">Passenger : </label>
+            <label htmlFor="">Passenger name : </label>
             <input
               id="outlined-basic"
               variant="outlined"
@@ -116,3 +121,4 @@ export default function Home() {
     </div>
   );
 }
+console.log();
