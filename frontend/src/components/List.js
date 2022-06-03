@@ -1,21 +1,21 @@
 import { React } from 'react'
-import data from "../data.json"
+import data from "../data/train.json"
 
 function List(props) {
-    const filteredData = data.filter((el) => {
-        //if no input the return the original
+
+    // Check the input value and return a result
+    const filteredData = data.filter((el) => {   
         if (props.input === '') {
             return el;
         }
-        //return the item which contains the user input
         else {
-            return el.text.toLowerCase().includes(props.input)
+            return el.Name.toLowerCase().includes(props.input)
         }
     })
     return (
         <ul>
             {filteredData.map((item) => (
-                <li key={item.id}>{item.text}</li>
+                <li key={item.PassengerId}>{item.Name}</li>
             ))}
         </ul>
     )

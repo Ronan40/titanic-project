@@ -74,7 +74,7 @@ export default function Login() {
           </button>
         </div>
         <p className="forgot-password text-right">
-        Don't have an account ?<Link to="/sign-up"> Register </Link>
+        Don't have an account ? <Link to="/sign-up">Register</Link>
         </p>
         <ToastContainer />
       </form>

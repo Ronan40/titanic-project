@@ -1,12 +1,9 @@
-import { React, useState, useEffect } from 'react'
+import { React, useState, useEffect } from "react";
 import List from "./List";
-import "./Home.css";
-import Login from "../assets/img/login.png";
 import Logout from "../assets/img/logout.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-import { toast } from "react-toastify";
 
 export default function Home() {
   const [inputText, setInputText] = useState("");
@@ -14,8 +11,9 @@ export default function Home() {
     //convert input text to lower case
     var lowerCase = e.target.value.toLowerCase();
     setInputText(lowerCase);
-
   };
+
+  // Check if user is already connected
 
   const navigate = useNavigate();
   const [cookies, removeCookie] = useCookies([]);
@@ -34,14 +32,13 @@ export default function Home() {
         if (!data.status) {
           removeCookie("jwt");
           navigate("/sign-in");
-        } else
-          toast(`Hi ${data.user} 🦄`, {
-            theme: "dark",
-          });
+        } else return;
       }
     };
     verifyUser();
   }, [cookies, navigate, removeCookie]);
+
+  // Logout function
 
   const logOut = () => {
     removeCookie("jwt");
@@ -71,9 +68,50 @@ export default function Home() {
       <div className="main">
         <h1>Passenger Search</h1>
         <div className="search">
-          <input id="outlined-basic" variant="outlined" label="Search" onChange={inputHandler}/>
+          <div className="input-info">
+            <label htmlFor="">Sex : </label>
+            <select name="sex" id="sex">
+              <option value=""> Choose a gender </option>
+              <option value="female">Female</option>
+              <option value="male">Male</option>
+            </select>
+          </div>
+          <div className="input-info">
+            <label htmlFor="">Class : </label>
+            <select name="class" id="class">
+              <option value=""> Choose a class </option>
+              <option value="first">1</option>
+              <option value="second">2</option>
+              <option value="third">3</option>
+            </select>
+          </div>
+          <div className="input-info">
+            <label htmlFor="">Age : </label>
+            <select name="class" id="class">
+              <option value=""> Choose a category </option>
+              <option value="child">Child (0 to 16)</option>
+              <option value="teen">Teenage (17 to 28)</option>
+              <option value="adult">Adult (29 to 59)</option>
+              <option value="senior">Senior ({">="} 60) </option>
+            </select>
+          </div>
+          <div className="input-info">
+            <button>
+              <Link to="/result">Analyse</Link>
+            </button>
+          </div>
+
+          <div className="input-info passenger">
+            <label htmlFor="">Passenger : </label>
+            <input
+              id="outlined-basic"
+              variant="outlined"
+              label="Search"
+              onChange={inputHandler}
+            />
+          </div>
         </div>
-        <List input={inputText}/>
+        <List input={inputText} />
       </div>
     </div>
   );

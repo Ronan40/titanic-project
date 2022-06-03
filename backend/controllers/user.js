@@ -1,12 +1,15 @@
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-  return jwt.sign({ id }, "rp40", {
+  return jwt.sign({ id }, process.env.MY_SECRET_TOKEN, {
     expiresIn: maxAge,
   });
 };
+
+// Console log errors 
 
 const handleErrors = (err) => {
   let errors = { email: "", password: "" };
@@ -34,6 +37,8 @@ const handleErrors = (err) => {
   return errors;
 };
 
+// Controller registration
+
 module.exports.register = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -53,6 +58,8 @@ module.exports.register = async (req, res, next) => {
     res.json({ errors, created: false });
   }
 };
+
+// Controller login
 
 module.exports.login = async (req, res) => {
   const { email, password } = req.body;

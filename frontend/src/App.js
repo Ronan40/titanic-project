@@ -5,7 +5,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Login from "./components/Login";
 import SignUp from "./components/Signup";
+import Result from "./components/Result";
 import Home from "./components/Home";
+
 function App() {
   return (
     <Router>
@@ -34,13 +36,13 @@ function App() {
         <div className="auth-wrapper">
           <div className="auth-inner">
             <Routes>
-            <Route path="/home" element={<Home />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/sign-in" element={<Login />} />
               <Route path="/sign-up" element={<SignUp />} />
+              <Route path="/result" element={<Result />} />
             </Routes>
           </div>
         </div>
-       
       </div>
     </Router>
   );
